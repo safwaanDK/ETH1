@@ -19,12 +19,11 @@ contract ExceptionHandling {
         emit AgeRequirementMet(msg.sender, age);
     }
     
-    function withdraw(uint256 amount) external {
+    function withdraw(uint256 amount) external view {
         require(amount > 0, "Amount must be greater than zero");
         require(address(this).balance >= amount, "Insufficient balance");
     
-        // Perform the withdrawal
-        payable(msg.sender).transfer(amount);
-        
+        // Revert the transaction without transferring any funds
+        revert("Withdrawal is currently disabled");
     }
 }
